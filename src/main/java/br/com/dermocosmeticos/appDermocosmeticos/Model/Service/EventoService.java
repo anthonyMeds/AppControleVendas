@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface EventoService {
 
-    ResponseEntity<Result<List<EventoDto.Response.BuscaEvento>>> buscarEvento(String nome, LocalDate data);
+    ResponseEntity<Result<List<EventoDto.Response.BuscaEvento>>> buscarEvento(String nomeDoEvento, LocalDate dataDoEvento);
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,19 +26,24 @@ public class EventoServiceImpl implements EventoService {
     EventoRepository eventoRepository;
 
     @Override
-    public ResponseEntity<Result<List<EventoDto.Response.BuscaEvento>>> buscarEvento(String nome, LocalDate data) {
+    public ResponseEntity<Result<List<EventoDto.Response.BuscaEvento>>> buscarEvento(String nomeDoEvento, LocalDate dataDoEvento) {
 
         List<EventoDto.Response.BuscaEvento> listaEventos = null;
 
-        if (nome == null || nome.isEmpty() || data == null) {
+        if ((nomeDoEvento == null || nomeDoEvento.equals("")) && dataDoEvento == null) {
             listaEventos = eventoRepository.buscarUltimosCincoEventos();
         } else {
-            listaEventos = eventoRepository.buscarEventos(nome, data);
+            listaEventos = eventoRepository.buscarEventos(nomeDoEvento, dataDoEvento);
         }
 
         if (listaEventos == null || listaEventos.isEmpty()) {
             return resultUtilBuscarEvento.resultSucesso(HttpStatus.OK, "Não foram encontrados eventos cadastrados com esses parâmetros.", Collections.emptyList());
         }
         return resultUtilBuscarEvento.resultSucesso(HttpStatus.OK, listaEventos);
+    }
+
+    public String formatarData(LocalDate data) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return data.format(formatter);
     }
 }
