@@ -10,8 +10,8 @@ public enum EventoDto {;
         String getNomeEvento();
     }
 
-    protected interface DataEvento {
-        String getDataEvento();
+    protected interface DataDoEvento {
+        String getDataDoEvento();
     }
 
     public enum Request {;
@@ -23,7 +23,7 @@ public enum EventoDto {;
         public interface BuscaEvento {
             Long getIdEvento();
             String getNomeEvento();
-            String getDataEvento();
+            String getDataDoEvento();
         }
     }
 }

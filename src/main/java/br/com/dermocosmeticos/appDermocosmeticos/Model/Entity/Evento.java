@@ -20,5 +20,5 @@ public class Evento implements Serializable {
     private String nomeDoEvento;
 
     @Column(name = "evento_data")
-    private LocalDate dataEvento;
+    private LocalDate dataDoEvento;
 }
