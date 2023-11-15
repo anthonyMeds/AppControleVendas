@@ -1,4 +1,4 @@
-package br.com.dermocosmeticos.appDermocosmeticos.Configuration;
+package br.com.dermocosmeticos.appDermocosmeticos.Configuration.result;
 
 
 import org.springframework.http.HttpStatus;

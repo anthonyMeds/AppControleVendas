@@ -1,5 +1,6 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Configuration;
 
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
