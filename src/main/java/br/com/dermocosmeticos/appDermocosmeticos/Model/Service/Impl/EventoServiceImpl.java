@@ -1,7 +1,9 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Model.Service.Impl;
 
-import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Result;
-import br.com.dermocosmeticos.appDermocosmeticos.Configuration.ResultUtil;
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.EntidadeResult;
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtil;
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtilTransactional;
 import br.com.dermocosmeticos.appDermocosmeticos.Dto.EventoDto;
 import br.com.dermocosmeticos.appDermocosmeticos.Model.Repository.EventoRepository;
 import br.com.dermocosmeticos.appDermocosmeticos.Model.Service.EventoService;
@@ -20,6 +22,9 @@ public class EventoServiceImpl implements EventoService {
 
     @Autowired
     private ResultUtil<List<EventoDto.Response.BuscaEvento>> resultUtilBuscarEvento;
+
+    @Autowired
+    private ResultUtilTransactional resultUtilTransactional;
 
 
     @Autowired
@@ -40,6 +45,14 @@ public class EventoServiceImpl implements EventoService {
             return resultUtilBuscarEvento.resultSucesso(HttpStatus.OK, "Não foram encontrados eventos cadastrados com esses parâmetros.", Collections.emptyList());
         }
         return resultUtilBuscarEvento.resultSucesso(HttpStatus.OK, listaEventos);
+    }
+
+    @Override
+    public ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) {
+
+        eventoRepository.cadastrar(cadastro.getNomeDoEvento(), cadastro.getDataDoEvento());
+
+        return resultUtilTransactional.resultSucesso(HttpStatus.CREATED);
     }
 
     public String formatarData(LocalDate data) {
