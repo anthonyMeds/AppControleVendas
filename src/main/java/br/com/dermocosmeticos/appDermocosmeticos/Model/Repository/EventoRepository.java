@@ -18,7 +18,7 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     @Query(nativeQuery = true,
     value = BUSCAR_EVENTOS)
-    List<EventoDto.Response.BuscaEvento> buscarEventos (String nome, LocalDate data);
+    List<EventoDto.Response.BuscaEvento> buscarEventos (String nome, String data);
 
 
     @Query(nativeQuery = true,
@@ -29,5 +29,5 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Modifying
     @Query(nativeQuery = true,
             value = CADASTRAR_EVENTO)
-    int cadastrar(String nomeDoEvento, LocalDate dataDoEvento);
+    int cadastrar(String nomeDoEvento, String dataDoEvento);
 }

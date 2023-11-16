@@ -1,5 +1,6 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Model.Service.Impl;
 
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.DataUtil;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.EntidadeResult;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtil;
@@ -38,7 +39,7 @@ public class EventoServiceImpl implements EventoService {
         if ((nomeDoEvento == null || nomeDoEvento.equals("")) && dataDoEvento == null) {
             listaEventos = eventoRepository.buscarUltimosCincoEventos();
         } else {
-            listaEventos = eventoRepository.buscarEventos(nomeDoEvento, dataDoEvento);
+            listaEventos = eventoRepository.buscarEventos(nomeDoEvento, DataUtil.formatar(dataDoEvento));
         }
 
         if (listaEventos == null || listaEventos.isEmpty()) {
@@ -50,7 +51,7 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) {
 
-        eventoRepository.cadastrar(cadastro.getNomeDoEvento(), cadastro.getDataDoEvento());
+        eventoRepository.cadastrar(cadastro.getNomeDoEvento(), DataUtil.formatar(cadastro.getDataDoEvento()));
 
         return resultUtilTransactional.resultSucesso(HttpStatus.CREATED);
     }

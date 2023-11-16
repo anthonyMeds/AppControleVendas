@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -24,7 +23,6 @@ public enum EventoDto {;
 
     protected interface DataDoEvento {
         @NotNull
-        @DateTimeFormat(pattern = "dd/MM/yyyy")
         LocalDate getDataDoEvento();
     }
 

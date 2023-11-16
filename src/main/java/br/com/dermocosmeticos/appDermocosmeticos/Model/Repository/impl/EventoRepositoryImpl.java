@@ -16,10 +16,13 @@ public class EventoRepositoryImpl {
             "ORDER BY evento_data DESC " +
             "LIMIT 5";
 
-    public static final String CADASTRAR_EVENTO = "insert into tb_evento " +
-            "(nomeDoEvento, " +
-            "dataDoEvento) " +
-            "values " +
-            "?1, STR_TO_DATE(?2, '%d/%m/%Y')";
+    public static final String CADASTRAR_EVENTO = "INSERT INTO tb_evento " +
+            "(evento_nome, " +
+            "evento_data) " +
+            "VALUES " +
+            "(?1, STR_TO_DATE(?2, '%d/%m/%Y'))";
+
+
+
 
 }
