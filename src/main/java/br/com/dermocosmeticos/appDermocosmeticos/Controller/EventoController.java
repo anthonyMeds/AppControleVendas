@@ -7,7 +7,6 @@ import br.com.dermocosmeticos.appDermocosmeticos.Model.Service.EventoService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,7 +26,7 @@ public class EventoController {
     @GetMapping("buscar")
     public ResponseEntity<Result<List<EventoDto.Response.BuscaEvento>>> buscarEvento(
             @RequestParam(required = false) @Size(max = 100) String nomeDoEvento,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dataDoEvento) {
+            @RequestParam(required = false) LocalDate dataDoEvento) {
 
         return eventoService.buscarEvento(nomeDoEvento, dataDoEvento);
     }

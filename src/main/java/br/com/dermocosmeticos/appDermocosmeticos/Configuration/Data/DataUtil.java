@@ -1,4 +1,4 @@
-package br.com.dermocosmeticos.appDermocosmeticos.Configuration;
+package br.com.dermocosmeticos.appDermocosmeticos.Configuration.Data;
 
 
 import java.time.LocalDate;

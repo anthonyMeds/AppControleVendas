@@ -1,6 +1,6 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Model.Service.Impl;
 
-import br.com.dermocosmeticos.appDermocosmeticos.Configuration.DataUtil;
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Data.DataUtil;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.EntidadeResult;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtil;
