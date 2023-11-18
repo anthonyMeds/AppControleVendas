@@ -1,5 +1,6 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Controller;
 
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Exception.ServiceException;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.EntidadeResult;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Dto.EventoDto;
@@ -33,7 +34,7 @@ public class EventoController {
 
     @PostMapping("cadastrar")
     public ResponseEntity<EntidadeResult> cadastrarEvento(
-            @RequestBody @Valid EventoDto.Request.Cadastro cadastro) {
+            @RequestBody @Valid EventoDto.Request.Cadastro cadastro) throws ServiceException {
         return eventoService.cadastrarEvento(cadastro);
     }
 

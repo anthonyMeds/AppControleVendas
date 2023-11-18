@@ -25,6 +25,8 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
             value = BUSCAR_ULTIMOS_5_EVENTOS)
     List<EventoDto.Response.BuscaEvento> buscarUltimosCincoEventos();
 
+    boolean existsByNomeDoEventoAndDataDoEvento(String nomeDoEvento, LocalDate dataDoEvento);
+
     @Transactional
     @Modifying
     @Query(nativeQuery = true,

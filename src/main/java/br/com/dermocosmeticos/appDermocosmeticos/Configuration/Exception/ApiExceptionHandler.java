@@ -69,4 +69,9 @@ public class ApiExceptionHandler {
     protected ResponseEntity<EntidadeResult> handleGenericException(Exception e) {
         return this.resultUtil.resultErro(HttpStatus.INTERNAL_SERVER_ERROR, e.toString(), "Não foi possível realizar a operação");
     }
+
+    @ExceptionHandler({ServiceException.class})
+    protected ResponseEntity<EntidadeResult> handleService(ServiceException se) {
+        return this.resultUtil.resultErro(HttpStatus.BAD_REQUEST, se.toString(), se.getMessage());
+    }
 }

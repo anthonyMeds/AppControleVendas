@@ -1,6 +1,7 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Model.Service.Impl;
 
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Data.DataUtil;
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Exception.ServiceException;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.EntidadeResult;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtil;
@@ -49,7 +50,11 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
-    public ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) {
+    public ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) throws ServiceException {
+
+        if (eventoRepository.existsByNomeDoEventoAndDataDoEvento(cadastro.getNomeDoEvento(), cadastro.getDataDoEvento())){
+            throw new ServiceException("Já existe evento cadastrado para essa data com o mesmo nome.");
+        }
 
         eventoRepository.cadastrar(cadastro.getNomeDoEvento(), DataUtil.formatar(cadastro.getDataDoEvento()));
 
