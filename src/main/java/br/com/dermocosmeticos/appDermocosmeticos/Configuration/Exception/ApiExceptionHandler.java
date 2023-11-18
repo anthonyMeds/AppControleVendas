@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.DateTimeException;
 
 @RestControllerAdvice
@@ -54,6 +56,13 @@ public class ApiExceptionHandler {
     protected ResponseEntity<EntidadeResult> handleMethodArgumentNotValid(MethodArgumentNotValidException manve) {
         String msgTecnica = manve.getBindingResult().getFieldError().getField() + ": " + manve.getBindingResult().getFieldError().getDefaultMessage();
         return this.resultUtil.resultErro(HttpStatus.BAD_REQUEST, msgTecnica, "Requisição possui campo inválido. Faça o preenchimento correto e tente novamente");
+    }
+
+    @ExceptionHandler(JpaSystemException.class)
+    protected ResponseEntity<EntidadeResult> handleJpaSystemException(JpaSystemException jpaException) {
+        Throwable rootCause = jpaException.getRootCause();
+
+        return this.resultUtil.resultErro(HttpStatus.INTERNAL_SERVER_ERROR, "Ano inválido.", "Não foi possível realizar a operação");
     }
 
     @ExceptionHandler(Exception.class)
