@@ -52,9 +52,9 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) throws ServiceException {
 
-        if (eventoRepository.existsByNomeDoEventoAndDataDoEvento(cadastro.getNomeDoEvento(), cadastro.getDataDoEvento())){
-            throw new ServiceException("Já existe evento cadastrado para essa data com o mesmo nome.");
-        }
+//        if (eventoRepository.existsByNomeDoEventoAndDataDoEvento(cadastro.getNomeDoEvento(), cadastro.getDataDoEvento())){
+//            throw new ServiceException("Já existe evento cadastrado para essa data com o mesmo nome.");
+//        }
 
         eventoRepository.cadastrar(cadastro.getNomeDoEvento(), DataUtil.formatar(cadastro.getDataDoEvento()));
 
