@@ -54,7 +54,8 @@ public enum EventoDto {;
     public enum Request {;
 
         @Data
-        public static class Cadastro implements NomeDoEvento, DataDoEvento, HorarioDoEventoInicio, HorarioDoEventoTermino, EnderecoDoEvento {
+        public static class Cadastro implements NomeDoEvento, DataDoEvento, HorarioDoEventoInicio, HorarioDoEventoTermino,
+                EnderecoDoEvento, NumeroDoEndereco, RuaDoEndereco, BairroDoEndereco {
             private String nomeDoEvento;
             private LocalDate dataDoEvento;
             private LocalTime horarioDoEventoInicio;
