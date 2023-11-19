@@ -7,18 +7,15 @@ import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.EntidadeRe
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Dto.EventoDto;
 import br.com.dermocosmeticos.appDermocosmeticos.Model.Service.EventoService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.PositiveOrZero;
-import java.time.LocalDate;
-import java.util.List;
 
 @Validated
 @RestController
@@ -45,6 +42,12 @@ public class EventoController {
     public ResponseEntity<EntidadeResult> cadastrarEvento(
             @RequestBody @Valid EventoDto.Request.Cadastro cadastro) throws ServiceException {
         return eventoService.cadastrarEvento(cadastro);
+    }
+
+    @PutMapping(value = "atualizar")
+    public ResponseEntity<EntidadeResult> atualizar(
+            @RequestBody @Valid EventoDto.Request.Atualizacao atualizacao) throws ServiceException {
+        return eventoService.atualizarEvento(atualizacao);
     }
 
 }

@@ -9,6 +9,7 @@ import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtil;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtilTransactional;
 import br.com.dermocosmeticos.appDermocosmeticos.Dto.EventoDto;
+import br.com.dermocosmeticos.appDermocosmeticos.Model.Entity.Evento;
 import br.com.dermocosmeticos.appDermocosmeticos.Model.Repository.EventoRepository;
 import br.com.dermocosmeticos.appDermocosmeticos.Model.Service.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,21 @@ public class EventoServiceImpl implements EventoService {
                 cadastro.getEnderecoDoEvento(), cadastro.getNumeroDoEndereco(), cadastro.getRuaDoEndereco(), cadastro.getBairroDoEndereco());
 
         return resultUtilTransactional.resultSucesso(HttpStatus.CREATED);
+    }
+
+    @Override
+    public ResponseEntity<EntidadeResult> atualizarEvento(EventoDto.Request.Atualizacao atualizacao) throws ServiceException {
+
+        EventoDto.Response.BuscaEvento evento = eventoRepository.findByNomeDoEventoAndDataDoEvento(atualizacao.getNomeDoEvento(), DataUtil.formatar(atualizacao.getDataDoEvento()));
+        if (evento == null) {
+            throw new ServiceException("Evento não encontrado.");
+        }
+
+        eventoRepository.atualizar(atualizacao.getNomeDoEvento(), DataUtil.formatar(atualizacao.getDataDoEvento()),
+                DataUtil.formatar(atualizacao.getHorarioDoEventoInicio()), DataUtil.formatar(atualizacao.getHorarioDoEventoTermino()),
+                atualizacao.getEnderecoDoEvento(), atualizacao.getNumeroDoEndereco(), atualizacao.getRuaDoEndereco(), atualizacao.getBairroDoEndereco());
+
+        return resultUtilTransactional.resultSucesso(HttpStatus.OK);
     }
 
     public String formatarData(LocalDate data) {

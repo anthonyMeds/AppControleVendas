@@ -15,4 +15,6 @@ public interface EventoService {
     ResponseEntity<Result<Paginacao<EventoDto.Response.BuscaEvento>>> buscarEvento(Integer pagina, Integer elementosPorPagina, String nomeCampoColuna, String tipoOrdenacao);
 
     ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) throws ServiceException;
+
+    ResponseEntity<EntidadeResult> atualizarEvento(EventoDto.Request.Atualizacao atualizacao) throws ServiceException;
 }

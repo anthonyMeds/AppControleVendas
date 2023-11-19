@@ -45,7 +45,15 @@ public class EventoRepositoryImpl {
             "?7, " +
             "?8)";
 
-
+    public static final String ATUALIZAR_EVENTO = "UPDATE tb_evento " +
+            "SET evento_horario_inicio = STR_TO_DATE(?3, '%H:%i'), " +
+            "evento_horario_termino = STR_TO_DATE(?4, '%H:%i'), " +
+            "evento_endereco = ?5, " +
+            "evento_endereco_numero = ?6, " +
+            "evento_endereco_rua = ?7, " +
+            "evento_endereco_bairro = ?8 " +
+            "WHERE evento_nome = ?1 " +
+            "AND evento_data = STR_TO_DATE(?2, '%d/%m/%Y')";
 
 
 

@@ -36,18 +36,22 @@ public enum EventoDto {;
     }
 
     protected interface EnderecoDoEvento {
+        @Size(max = 255)
         String getEnderecoDoEvento();
     }
 
     protected interface NumeroDoEndereco {
+        @Size(max = 255)
         String getNumeroDoEndereco();
     }
 
     protected interface RuaDoEndereco {
+        @Size(max = 255)
         String getRuaDoEndereco();
     }
 
     protected interface BairroDoEndereco {
+        @Size(max = 255)
         String getBairroDoEndereco();
     }
 
@@ -65,6 +69,8 @@ public enum EventoDto {;
             private String ruaDoEndereco;
             private String bairroDoEndereco;
         }
+
+        public static class Atualizacao extends Cadastro {}
     }
 
     public enum Response {;

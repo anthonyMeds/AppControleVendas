@@ -35,4 +35,13 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
             value = CADASTRAR_EVENTO)
     int cadastrar(String nomeDoEvento, String dataDoEvento, String horarioDoEventoInicio, String horarioDoEventoTermino,
                   String enderecoDoEvento, String numeroDoEndereco, String ruaDoEndereco, String bairroDoEndereco);
+
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true,
+            value = ATUALIZAR_EVENTO)
+    int atualizar(String nomeDoEvento, String dataDoEvento, String horarioDoEventoInicio, String horarioDoEventoTermino,
+                  String enderecoDoEvento, String numeroDoEndereco, String ruaDoEndereco, String bairroDoEndereco);
+
+    EventoDto.Response.BuscaEvento findByNomeDoEventoAndDataDoEvento(String nomeDoEvento, String dataDoEvento);
 }
