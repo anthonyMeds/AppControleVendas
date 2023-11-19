@@ -2,6 +2,8 @@ package br.com.dermocosmeticos.appDermocosmeticos.Model.Repository;
 
 import br.com.dermocosmeticos.appDermocosmeticos.Dto.EventoDto;
 import br.com.dermocosmeticos.appDermocosmeticos.Model.Entity.Evento;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +20,7 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
 
     @Query(nativeQuery = true,
     value = BUSCAR_EVENTOS)
-    List<EventoDto.Response.BuscaEvento> buscarEventos (String nome, String data);
+    Page<EventoDto.Response.BuscaEvento> buscarEventos (Pageable pageable);
 
 
     @Query(nativeQuery = true,
@@ -31,5 +33,6 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Modifying
     @Query(nativeQuery = true,
             value = CADASTRAR_EVENTO)
-    int cadastrar(String nomeDoEvento, String dataDoEvento);
+    int cadastrar(String nomeDoEvento, String dataDoEvento, String horarioDoEventoInicio, String horarioDoEventoTermino,
+                  String enderecoDoEvento, String numeroDoEndereco, String ruaDoEndereco, String bairroDoEndereco);
 }

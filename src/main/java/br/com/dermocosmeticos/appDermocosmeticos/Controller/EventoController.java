@@ -1,6 +1,8 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Controller;
 
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Annotations.ValoresPermitidos;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Exception.ServiceException;
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Paginacao.Paginacao;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.EntidadeResult;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Dto.EventoDto;
@@ -13,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,11 +29,16 @@ public class EventoController {
     EventoService eventoService;
 
     @GetMapping("buscar")
-    public ResponseEntity<Result<List<EventoDto.Response.BuscaEvento>>> buscarEvento(
-            @RequestParam(required = false) @Size(max = 100) String nomeDoEvento,
-            @RequestParam(required = false) LocalDate dataDoEvento) {
+    public ResponseEntity<Result<Paginacao<EventoDto.Response.BuscaEvento>>> buscarEvento(
+            @RequestParam(defaultValue = "0") @PositiveOrZero Integer pagina,
+            @RequestParam(defaultValue = "15") @PositiveOrZero @Min(1) Integer elementosPorPagina,
+            @ValoresPermitidos(value = {"nomeDoEvento","dataDoEvento", "horarioDoEventoInicio", "horarioDoEventoTermino", "enderecoDoEvento",
+            "bairroDoEndereco", "numeroDoEndereco", "ruaDoEndereco"})
+            @RequestParam(defaultValue = "dataDoEvento") String nomeCampoColuna,
+            @RequestParam(defaultValue = "desc") @ValoresPermitidos({"asc", "desc"}) String tipoOrdenacao
+    ) {
 
-        return eventoService.buscarEvento(nomeDoEvento, dataDoEvento);
+        return eventoService.buscarEvento(pagina, elementosPorPagina, nomeCampoColuna, tipoOrdenacao);
     }
 
     @PostMapping("cadastrar")
