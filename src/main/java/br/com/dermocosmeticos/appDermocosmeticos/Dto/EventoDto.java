@@ -17,13 +17,11 @@ public enum EventoDto {;
     }
 
     protected interface NomeDoEvento {
-        @NotNull
         @Size(max = 100)
         String getNomeDoEvento();
     }
 
     protected interface DataDoEvento {
-        @NotNull
         LocalDate getDataDoEvento();
     }
 
@@ -58,8 +56,9 @@ public enum EventoDto {;
     public enum Request {;
 
         @Data
-        public static class Cadastro implements NomeDoEvento, DataDoEvento, HorarioDoEventoInicio, HorarioDoEventoTermino,
+        public static class Cadastro implements IdDoEvento, NomeDoEvento, DataDoEvento, HorarioDoEventoInicio, HorarioDoEventoTermino,
                 EnderecoDoEvento, NumeroDoEndereco, RuaDoEndereco, BairroDoEndereco {
+            private Long idDoEvento;
             private String nomeDoEvento;
             private LocalDate dataDoEvento;
             private LocalTime horarioDoEventoInicio;

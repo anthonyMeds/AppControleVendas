@@ -41,7 +41,6 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     @Query(nativeQuery = true,
             value = ATUALIZAR_EVENTO)
     int atualizar(String nomeDoEvento, String dataDoEvento, String horarioDoEventoInicio, String horarioDoEventoTermino,
-                  String enderecoDoEvento, String numeroDoEndereco, String ruaDoEndereco, String bairroDoEndereco);
+                  String enderecoDoEvento, String numeroDoEndereco, String ruaDoEndereco, String bairroDoEndereco, Long idDoEvento);
 
-    EventoDto.Response.BuscaEvento findByNomeDoEventoAndDataDoEvento(String nomeDoEvento, String dataDoEvento);
 }

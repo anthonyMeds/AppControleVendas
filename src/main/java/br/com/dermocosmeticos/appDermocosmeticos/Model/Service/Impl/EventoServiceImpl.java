@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Service
 public class EventoServiceImpl implements EventoService {
@@ -57,6 +58,10 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) throws ServiceException {
 
+        if (cadastro.getDataDoEvento() == null || cadastro.getNomeDoEvento() == null) {
+            throw new ServiceException("Para cadastrar um novo evento, nome e data são obrigatórios.");
+        }
+
         if (eventoRepository.existsByNomeDoEventoAndDataDoEvento(cadastro.getNomeDoEvento(), cadastro.getDataDoEvento())){
             throw new ServiceException("Já existe evento cadastrado para essa data com o mesmo nome.");
         }
@@ -71,14 +76,17 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public ResponseEntity<EntidadeResult> atualizarEvento(EventoDto.Request.Atualizacao atualizacao) throws ServiceException {
 
-        EventoDto.Response.BuscaEvento evento = eventoRepository.findByNomeDoEventoAndDataDoEvento(atualizacao.getNomeDoEvento(), DataUtil.formatar(atualizacao.getDataDoEvento()));
-        if (evento == null) {
-            throw new ServiceException("Evento não encontrado.");
+        if (atualizacao.getIdDoEvento() == null) {
+            throw new ServiceException("Informe o id do evento desejado para atualizar");
         }
+
+        eventoRepository.findById(atualizacao.getIdDoEvento()).orElseThrow(() ->
+            new ServiceException("Evento não encontrado."));
 
         eventoRepository.atualizar(atualizacao.getNomeDoEvento(), DataUtil.formatar(atualizacao.getDataDoEvento()),
                 DataUtil.formatar(atualizacao.getHorarioDoEventoInicio()), DataUtil.formatar(atualizacao.getHorarioDoEventoTermino()),
-                atualizacao.getEnderecoDoEvento(), atualizacao.getNumeroDoEndereco(), atualizacao.getRuaDoEndereco(), atualizacao.getBairroDoEndereco());
+                atualizacao.getEnderecoDoEvento(), atualizacao.getNumeroDoEndereco(), atualizacao.getRuaDoEndereco(),
+                atualizacao.getBairroDoEndereco(), atualizacao.getIdDoEvento());
 
         return resultUtilTransactional.resultSucesso(HttpStatus.OK);
     }
