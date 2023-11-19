@@ -35,7 +35,7 @@ public class ApiExceptionHandler {
         try {
             throw hmnre.getRootCause();
         } catch (DateTimeException var5) {
-            msgTecnica.append("data inválida");
+            msgTecnica.append("data ou hora inválida");
         } catch (Exception var6) {
             msgTecnica.append("valor inválido");
         }
