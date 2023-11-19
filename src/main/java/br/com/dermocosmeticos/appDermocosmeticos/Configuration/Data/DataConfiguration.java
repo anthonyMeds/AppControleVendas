@@ -27,12 +27,12 @@ public class DataConfiguration {
     public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
         return builder -> {
             // Serializers
-            builder.serializers(new LocalTimeSerializer(DateTimeFormatter.ofPattern(HHMMSS_DOIS_PONTOS).withResolverStyle(ResolverStyle.STRICT)));
+            builder.serializers(new LocalTimeSerializer(DateTimeFormatter.ofPattern(HHMM_DOIS_PONTOS).withResolverStyle(ResolverStyle.STRICT)));
             builder.serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern(DDMMAAAA_BARRA).withResolverStyle(ResolverStyle.STRICT)));
             builder.serializers(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DDMMAAAA_HHMMSS_BARRA).withResolverStyle(ResolverStyle.STRICT)));
 
             // Deserializers
-            builder.deserializers(new LocalTimeDeserializer(DateTimeFormatter.ofPattern(HHMMSS_DOIS_PONTOS).withResolverStyle(ResolverStyle.STRICT)));
+            builder.deserializers(new LocalTimeDeserializer(DateTimeFormatter.ofPattern(HHMM_DOIS_PONTOS).withResolverStyle(ResolverStyle.STRICT)));
             builder.deserializers(new LocalDateDeserializer(DateTimeFormatter.ofPattern(DDMMAAAA_BARRA).withResolverStyle(ResolverStyle.STRICT)));
             builder.deserializers(new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DDMMAAAA_HHMMSS_BARRA).withResolverStyle(ResolverStyle.STRICT)));
         };

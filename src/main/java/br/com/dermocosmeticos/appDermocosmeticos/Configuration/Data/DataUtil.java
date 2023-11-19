@@ -53,7 +53,7 @@ public class DataUtil {
     }
 
     public static String formatar(LocalTime localTime) {
-        return localTime != null ? formatar(localTime, "HH:mm:ss") : null;
+        return localTime != null ? formatar(localTime, "HH:mm") : null;
     }
 
     public static String formatar(LocalTime localTime, String formatoDesejado) {
