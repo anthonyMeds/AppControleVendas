@@ -21,7 +21,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
             value = BUSCAR_PRODUTOS)
     Page<ProdutoDto.Response.BuscaProduto> buscarProdutos(Pageable pageable);
 
-    boolean existsByProdutoNome(String produtoNome);
+    boolean existsByNomeDoProduto(String produtoNome);
 
     @Transactional
     @Modifying

@@ -17,7 +17,7 @@ public class Produto implements Serializable {
     private Long produtoId;
 
     @Column(name = "produto_nome")
-    private String produtoNome;
+    private String nomeDoProduto;
 
     @Column(name = "produto_categoria")
     private String produtoCategoria;

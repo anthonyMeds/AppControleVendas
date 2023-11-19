@@ -52,10 +52,10 @@ public class ProdutoServiceImpl implements ProdutoService {
     public ResponseEntity<EntidadeResult> cadastrarProduto(ProdutoDto.Request.Cadastro cadastro) throws ServiceException {
 
         if (cadastro.getNomeDoProduto() == null) {
-            throw new ServiceException("Para cadastrar um novo produto, nome e preço unitário são obrigatórios.");
+            throw new ServiceException("Para cadastrar um novo produto, nome é obrigatório.");
         }
 
-        if (produtoRepository.existsByProdutoNome(cadastro.getNomeDoProduto())) {
+        if (produtoRepository.existsByNomeDoProduto(cadastro.getNomeDoProduto())) {
             throw new ServiceException("Já existe um produto cadastrado com esse nome.");
         }
 

@@ -29,9 +29,9 @@ public class ProdutoController {
     public ResponseEntity<Result<Paginacao<ProdutoDto.Response.BuscaProduto>>> buscarProduto(
             @RequestParam(defaultValue = "0") @PositiveOrZero Integer pagina,
             @RequestParam(defaultValue = "15") @PositiveOrZero @Min(1) Integer elementosPorPagina,
-            @ValoresPermitidos(value = {"produtoNome", "produtoCategoria", "produtoMarca", "precoUnitario"})
-            @RequestParam(defaultValue = "produtoNome") String nomeCampoColuna,
-            @RequestParam(defaultValue = "desc") @ValoresPermitidos({"asc", "desc"}) String tipoOrdenacao
+            @ValoresPermitidos(value = {"nomeDoProduto", "produtoCategoria", "produtoMarca", "precoUnitario"})
+            @RequestParam(defaultValue = "nomeDoProduto") String nomeCampoColuna,
+            @RequestParam(defaultValue = "asc") @ValoresPermitidos({"asc", "desc"}) String tipoOrdenacao
     ) {
         return produtoService.buscarProduto(pagina, elementosPorPagina, nomeCampoColuna, tipoOrdenacao);
     }
