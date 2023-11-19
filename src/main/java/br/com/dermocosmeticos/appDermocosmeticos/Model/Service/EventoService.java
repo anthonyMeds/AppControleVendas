@@ -17,4 +17,6 @@ public interface EventoService {
     ResponseEntity<EntidadeResult> cadastrarEvento(EventoDto.Request.Cadastro cadastro) throws ServiceException;
 
     ResponseEntity<EntidadeResult> atualizarEvento(EventoDto.Request.Atualizacao atualizacao) throws ServiceException;
+
+    ResponseEntity<EntidadeResult> excluirEvento(Long idDoEvento) throws ServiceException;
 }

@@ -91,6 +91,17 @@ public class EventoServiceImpl implements EventoService {
         return resultUtilTransactional.resultSucesso(HttpStatus.OK);
     }
 
+    @Override
+    public ResponseEntity<EntidadeResult> excluirEvento(Long idDoEvento) throws ServiceException {
+
+        eventoRepository.findById(idDoEvento).orElseThrow(() ->
+                new ServiceException("Evento não encontrado."));
+
+        eventoRepository.deleteById(idDoEvento);
+
+        return resultUtilTransactional.resultSucesso(HttpStatus.OK);
+    }
+
     public String formatarData(LocalDate data) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return data.format(formatter);

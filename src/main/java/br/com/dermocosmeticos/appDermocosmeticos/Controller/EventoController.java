@@ -45,9 +45,14 @@ public class EventoController {
     }
 
     @PutMapping(value = "atualizar")
-    public ResponseEntity<EntidadeResult> atualizar(
+    public ResponseEntity<EntidadeResult> atualizarEvento(
             @RequestBody @Valid EventoDto.Request.Atualizacao atualizacao) throws ServiceException {
         return eventoService.atualizarEvento(atualizacao);
+    }
+    @DeleteMapping("excluir")
+    public ResponseEntity<EntidadeResult> excluirEvento(
+            @RequestParam @PositiveOrZero Long idDoEvento) throws ServiceException {
+        return eventoService.excluirEvento(idDoEvento);
     }
 
 }
