@@ -94,6 +94,10 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public ResponseEntity<EntidadeResult> excluirEvento(Long idDoEvento) throws ServiceException {
 
+        if (idDoEvento == null) {
+            throw new ServiceException("Informe o id do evento desejado para atualizar");
+        }
+
         eventoRepository.findById(idDoEvento).orElseThrow(() ->
                 new ServiceException("Evento não encontrado."));
 

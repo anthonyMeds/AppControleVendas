@@ -7,9 +7,6 @@ import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.Result;
 import br.com.dermocosmeticos.appDermocosmeticos.Dto.EventoDto;
 import org.springframework.http.ResponseEntity;
 
-import java.time.LocalDate;
-import java.util.List;
-
 public interface EventoService {
 
     ResponseEntity<Result<Paginacao<EventoDto.Response.BuscaEvento>>> buscarEvento(Integer pagina, Integer elementosPorPagina, String nomeCampoColuna, String tipoOrdenacao);
