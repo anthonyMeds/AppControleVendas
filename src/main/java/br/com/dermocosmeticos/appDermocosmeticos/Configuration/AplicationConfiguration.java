@@ -1,5 +1,6 @@
 package br.com.dermocosmeticos.appDermocosmeticos.Configuration;
 
+import br.com.dermocosmeticos.appDermocosmeticos.Configuration.Paginacao.OrdenacaoPaginacaoUtil;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtil;
 import br.com.dermocosmeticos.appDermocosmeticos.Configuration.result.ResultUtilTransactional;
 import org.springframework.context.annotation.Bean;
@@ -33,4 +34,9 @@ public class AplicationConfiguration {
 
     @Bean
     public ResultUtilTransactional resultUtilTransactional() {return  new ResultUtilTransactional();}
+
+    @Bean
+    public OrdenacaoPaginacaoUtil ordenacaoPaginacaoUtil() {return  new OrdenacaoPaginacaoUtil();}
+
+
 }
